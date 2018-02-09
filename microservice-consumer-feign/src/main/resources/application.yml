@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: microservice-consumer-feign
+server:
+  port: 8191
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    service-url:
+      #defaultZone: http://localhost:8761/eureka
+      defaultZone: http://user:123456@localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+    #instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}

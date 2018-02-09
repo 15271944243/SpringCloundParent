@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>xxx.learn</groupId>
+    <artifactId>SpringCloundParent</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>microservice-provider</module>
+        <module>microservice-consumer</module>
+        <module>microservice-eureka</module>
+        <module>microservice-consumer-ribbon</module>
+        <module>microservice-provider-8082</module>
+        <module>microservice-provider-8083</module>
+        <module>microservice-provider-8084</module>
+        <module>microservice-provider-8085</module>
+        <module>microservice-consumer-ribbon-properties</module>
+        <module>microservice-consumer-feign</module>
+        <module>microservice-consumer-fegin-custom</module>
+        <module>microservice-consumer-ribbon-hystrix</module>
+    </modules>
+
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <maven_compiler_plugin_version>3.5</maven_compiler_plugin_version>
+        <java_source_version>1.8</java_source_version>
+        <java_target_version>1.8</java_target_version>
+        <file_encoding>UTF-8</file_encoding>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- 在初学spring boot时，官方示例中，都是让我们继承一个spring的spring-boot-starter-parent 这个parent：-->
+            <!-- 但是在真正的项目开发中，往往模块需要定义自己的parent,而maven的pom只允许一个parent存在，-->
+            <!-- 这种情况下，可以采用下面的定义来避免使用spring-boot-start-parent。-->
+            <!-- 在子项目的dependencies中，不需要(也不能)再次添加对spring-boot-dependencies的声明了，否则子项目将无法编译通过。-->
+            <!-- 所以，有了它之后，我们在子项目中使用到的相关依赖，就不需要声明version了 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>1.5.4.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- 进行SpringCloud依赖包的导入处理 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Dalston.SR4</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${file_encoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+
+    <repositories>
+        <repository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/libs-snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+</project>

@@ -1,0 +1,27 @@
+spring:
+  datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://120.25.216.91:3306/EQT?useSSL=true&verifyServerCertificate=false&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+      username: eqt
+      password: eqt0000
+  http:
+      multipart:
+        max-file-size: 5MB
+        max-request-size: 10MB
+  application:
+    name: microservice-provider-two
+mybatis:
+  mapper-locations: classpath*:mybatis/*Mapper.xml
+  type-aliases-package: xxx.learn.model
+server:
+  port: 8085
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    service-url:
+      #defaultZone: http://localhost:8761/eureka
+      defaultZone: http://user:123456@localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+    #instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
